@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="carousel.css">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="container__hed">
+
+            <h1 class="h1">Личная страница Кравченко Данила</h1>
+
+            <div class="header__inner">
+               
+    
+                <nav class="nav" id="nav">
+                    <a class="nav__link" href="index.html" data-scroll="#works">Личная страница</a>
+                    <a class="nav__link" href="news.html" data-scroll="#team">Новости</a>
+                    <a class="nav__link" href="photo.html" data-scroll="#tb">Фото</a>
+                    <a class="nav__link" href="rozklad.html" data-scroll="#ram">Расписание</a>
+                    <a class="nav__link" href="carousel.html" data-scroll="#ram">Слайдер</a>
+                </nav>
+    
+    
+            </div>
+        </div>
+    </header>
+
+    <div class="slider-body">
+        
+        <div class="flex-wrapper">
+            <div class="slider-wrapper">
+                <div class="slide active">
+                    <img src="./assets/images/n1.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img src="./assets/images/n2.jpg" alt="">
+                </div>
+
+                <div class="slide">
+                    <img src="./assets/images/n3.jpg" alt="">
+                </div>
+                <div id="btn-prev"></div>
+                <div id="btn-next"></div>
+            </div>
+        </div>
+        <div class="dots-wrapper">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            
+        </div>
+    </div>
+
+    <script>
+        const prev = document.getElementById('btn-prev'),
+      next = document.getElementById('btn-next'),
+      slides = document.querySelectorAll('.slide'),
+      dots = document.querySelectorAll('.dot');
+
+let index = 0;
+
+const activeSlide = n => {
+    for(slide of slides) {
+        slide.classList.remove('active');
+    }
+    slides[n].classList.add('active');
+}
+
+const activeDot = n => {
+    for(dot of dots) {
+        dot.classList.remove('active');
+    }
+    dots[n].classList.add('active');
+}
+
+const prepareCurrentSlide = ind => {
+    activeSlide(index);
+    activeDot(index);
+}
+
+const nextSlide = () => {
+    if(index == slides.length - 1) {
+        index = 0;
+        prepareCurrentSlide(index);
+    }else {
+        index++;
+        prepareCurrentSlide(index);
+    }
+}
+
+const prevSlide = () => {
+    if(index == slides.length - 1) {
+        index = 0;
+        prepareCurrentSlide(index);
+    }else {
+        index++;
+        prepareCurrentSlide(index);
+    }
+}
+
+dots.forEach((item, indexDot)=> {
+    item.addEventListener('click', () => {
+        index = indexDot;
+        prepareCurrentSlide(index);
+    })
+})
+
+next.addEventListener('click', nextSlide);
+prev.addEventListener('click', prevSlide);
+    </script>
+    
+</body>
+</html>
